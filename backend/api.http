@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:3000
+@todoId = {{createTodo.response.body.data.id}}
+
+### ──────────────────────────────────────
+###  TODOS
+### ──────────────────────────────────────
+
+### 1. Get all todos
+GET {{baseUrl}}/todos
+Accept: application/json
+
+###
+
+### 2. Create a todo  (saves response id into @todoId)
+# @name createTodo
+POST {{baseUrl}}/todos
+Content-Type: application/json
+
+{
+  "title": "Buy groceries",
+  "description": "Milk, Eggs, Bread",
+  "completed": false
+}
+
+###
+
+### 3. Get todo by ID  (uses the id from the create response above)
+GET {{baseUrl}}/todos/{{todoId}}
+Accept: application/json
+
+###
+
+### 4. Update todo by ID
+PUT {{baseUrl}}/todos/{{todoId}}
+Content-Type: application/json
+
+{
+  "title": "Buy groceries (updated)",
+  "completed": true
+}
+
+###
+
+### 5. Delete todo by ID
+DELETE {{baseUrl}}/todos/{{todoId}}
+
+###
+
+### 6. Create todo – missing title (expect 400)
+POST {{baseUrl}}/todos
+Content-Type: application/json
+
+{
+  "description": "No title here"
+}
+
+###
+
+### 7. Get non-existent todo (expect 404)
+GET {{baseUrl}}/todos/non-existent-id
+
+### ──────────────────────────────────────
+###  TIPS
+### ──────────────────────────────────────
+
+### 8. Get all tips
+GET {{baseUrl}}/tips
+Accept: application/json
+
+###
+
+### 9. Get a random tip
+GET {{baseUrl}}/tips/random
+Accept: application/json
+
+###
+
+### 10. Get tip by ID
+GET {{baseUrl}}/tips/3
+Accept: application/json
+
+###
+
+### 11. Get non-existent tip (expect 404)
+GET {{baseUrl}}/tips/999
