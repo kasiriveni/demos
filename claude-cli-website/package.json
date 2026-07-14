@@ -1,0 +1,31 @@
+{
+  "name": "claude-cli-master-guide",
+  "version": "1.0.0",
+  "description": "Comprehensive learning guide for Claude CLI from beginner to advanced",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server",
+    "serve": "python -m http.server 8000",
+    "dev": "npx live-server",
+    "test": "echo \"No tests yet\"",
+    "build": "echo \"Static site - no build needed\""
+  },
+  "keywords": [
+    "claude-cli",
+    "anthropic",
+    "ai",
+    "learning",
+    "guide",
+    "tutorial"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/claude-cli-master-guide"
+  }
+}

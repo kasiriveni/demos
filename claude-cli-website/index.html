@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude CLI - Master Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Claude CLI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link" onclick="navigateTo('home')">Home</a></li>
+                <li><a href="#beginner" class="nav-link" onclick="navigateTo('beginner')">Beginner</a></li>
+                <li><a href="#intermediate" class="nav-link" onclick="navigateTo('intermediate')">Intermediate</a></li>
+                <li><a href="#advanced" class="nav-link" onclick="navigateTo('advanced')">Advanced</a></li>
+                <li><a href="#examples" class="nav-link" onclick="navigateTo('examples')">Examples</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Master Claude CLI</h1>
+                <p class="hero-subtitle">From Beginner to Advanced</p>
+                <p class="hero-description">
+                    Learn everything about Claude Command Line Interface (CLI) - powerful tool for interacting with Claude AI directly from your terminal.
+                </p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="navigateTo('beginner')">Start Learning</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('examples')">View Examples</button>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Comprehensive Learning</h3>
+                    <p>Structured curriculum covering all aspects of Claude CLI</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Hands-On Examples</h3>
+                    <p>Real-world examples and code snippets you can try</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Advanced Topics</h3>
+                    <p>Explore advanced usage patterns and best practices</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beginner Section -->
+        <section id="beginner" class="section">
+            <h2>🟢 Beginner Level</h2>
+
+            <div class="lesson-card">
+                <h3>1. Installation & Setup</h3>
+                <p>Get started with Claude CLI installation and basic configuration.</p>
+                <div class="code-block">
+                    <code>
+# Install Claude CLI<br>
+npm install -g @anthropic-ai/claude-cli<br><br>
+
+# Verify installation<br>
+claude --version<br><br>
+
+# Set your API key<br>
+export ANTHROPIC_API_KEY=your_api_key_here
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>2. Your First Command</h3>
+                <p>Send your first message to Claude CLI and get a response.</p>
+                <div class="code-block">
+                    <code>
+# Simple query<br>
+claude "What is Claude CLI?"<br><br>
+
+# Multi-line prompt<br>
+claude "Explain the concept of:<br>
+1. APIs<br>
+2. REST<br>
+3. GraphQL"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>3. Basic Flags & Options</h3>
+                <p>Learn essential command-line flags.</p>
+                <div class="code-block">
+                    <code>
+# Show help<br>
+claude --help<br><br>
+
+# Set model<br>
+claude --model claude-3-opus-20250219 "Your prompt"<br><br>
+
+# Set temperature (0-1)<br>
+claude --temperature 0.5 "Your prompt"<br><br>
+
+# Set max tokens<br>
+claude --max-tokens 1000 "Your prompt"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>4. Reading from Files</h3>
+                <p>Process file content with Claude CLI.</p>
+                <div class="code-block">
+                    <code>
+# Read single file<br>
+claude "Summarize this:" < document.txt<br><br>
+
+# Process with cat<br>
+cat code.js | claude "Review this code"<br><br>
+
+# Pass file as context<br>
+claude "Fix errors in:" "$(cat script.py)"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>5. Output Options</h3>
+                <p>Control how results are displayed and saved.</p>
+                <div class="code-block">
+                    <code>
+# Save to file<br>
+claude "Generate code" > output.txt<br><br>
+
+# Append to file<br>
+claude "More code" >> output.txt<br><br>
+
+# Format as JSON<br>
+claude --json "Your prompt"<br><br>
+
+# Show tokens used<br>
+claude --show-tokens "Your prompt"
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intermediate Section -->
+        <section id="intermediate" class="section">
+            <h2>🟡 Intermediate Level</h2>
+
+            <div class="lesson-card">
+                <h3>1. Conversation Context</h3>
+                <p>Maintain conversation history and context across multiple calls.</p>
+                <div class="code-block">
+                    <code>
+# Start a conversation<br>
+claude --conversation my-chat "First message"<br><br>
+
+# Continue conversation<br>
+claude --conversation my-chat "Follow-up question"<br><br>
+
+# List conversations<br>
+claude --list-conversations<br><br>
+
+# View conversation history<br>
+claude --show-history my-chat
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>2. System Prompts</h3>
+                <p>Use system prompts to define Claude's behavior and role.</p>
+                <div class="code-block">
+                    <code>
+# Set system prompt<br>
+claude --system "You are an expert Python developer" \<br>
+       "Write a function to sort arrays"<br><br>
+
+# From file<br>
+claude --system-file system-prompt.txt \<br>
+       "Your user prompt"<br><br>
+
+# Multi-role system<br>
+claude --system "Act as a teacher" \<br>
+       "Explain quantum computing"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>3. Advanced Model Options</h3>
+                <p>Tune model parameters for specific use cases.</p>
+                <div class="code-block">
+                    <code>
+# Available models<br>
+claude --list-models<br><br>
+
+# Use specific version<br>
+claude --model claude-3-5-sonnet-20241022 "prompt"<br><br>
+
+# Adjust temperature<br>
+# 0 = deterministic, 1 = creative<br>
+claude --temperature 0.2 "Code review"<br>
+claude --temperature 0.9 "Story writing"<br><br>
+
+# Max tokens control<br>
+claude --max-tokens 2000 "Long response prompt"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>4. Batch Processing</h3>
+                <p>Process multiple prompts efficiently.</p>
+                <div class="code-block">
+                    <code>
+# From file with multiple queries<br>
+cat queries.txt | while read line; do<br>
+  claude "$line" >> results.txt<br>
+done<br><br>
+
+# Batch with parallel processing<br>
+cat items.txt | parallel claude "Process: {}"<br><br>
+
+# CSV processing<br>
+while IFS=, read id query; do<br>
+  claude "$query" >> output_$id.txt<br>
+done < data.csv
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>5. Error Handling & Validation</h3>
+                <p>Handle errors and validate responses gracefully.</p>
+                <div class="code-block">
+                    <code>
+# Check exit code<br>
+claude "Your prompt"<br>
+if [ $? -ne 0 ]; then<br>
+  echo "Error occurred"<br>
+fi<br><br>
+
+# Validate API key<br>
+claude --validate-key<br><br>
+
+# Retry on failure<br>
+claude --retry 3 "Your prompt"<br><br>
+
+# Timeout handling<br>
+timeout 30s claude "Long task"
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Section -->
+        <section id="advanced" class="section">
+            <h2>🔴 Advanced Level</h2>
+
+            <div class="lesson-card">
+                <h3>1. Custom Workflows & Scripting</h3>
+                <p>Build sophisticated automation with Claude CLI.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+# Advanced workflow script<br><br>
+
+analyze_code() {<br>
+  local file=$1<br>
+  local model=${2:-claude-3-5-sonnet-20241022}<br>
+  <br>
+  echo "Analyzing $file..."<br>
+  claude --model "$model" \<br>
+    --system "You are a code reviewer" \<br>
+    "Review this code: $(cat $file)"<br>
+}<br><br>
+
+# Usage<br>
+analyze_code "app.js" "claude-3-opus-20250219"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>2. Integration with External Tools</h3>
+                <p>Combine Claude CLI with other CLI tools for powerful workflows.</p>
+                <div class="code-block">
+                    <code>
+# Process git diffs<br>
+git diff | claude --system "Review code changes"<br><br>
+
+# Analyze logs<br>
+tail -f app.log | claude "Diagnose issues"<br><br>
+
+# Database query analysis<br>
+psql -c "EXPLAIN SELECT ..." | \<br>
+  claude "Optimize this query"<br><br>
+
+# JSON manipulation<br>
+jq '.items[]' data.json | \<br>
+  claude --json "Structure this data"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>3. Multi-Turn Conversations</h3>
+                <p>Build complex interactive conversations with state management.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+SESSION="debug-session"<br><br>
+
+# Start debugging session<br>
+claude --conversation "$SESSION" \<br>
+  --system "You are a debugging expert" \<br>
+  "I'm seeing 500 errors"<br><br>
+
+# Continue with context<br>
+claude --conversation "$SESSION" \<br>
+  "The error happens at line 42"<br><br>
+
+# Save and export<br>
+claude --export-conversation "$SESSION" > debug.md
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>4. Performance Optimization</h3>
+                <p>Optimize for speed, cost, and efficiency.</p>
+                <div class="code-block">
+                    <code>
+# Use faster model for simple tasks<br>
+claude --model claude-3-5-haiku-20241022 \<br>
+  --temperature 0 "Quick task"<br><br>
+
+# Cache context for repeated queries<br>
+CONTEXT=$(cat large_file.txt)<br>
+for query in query1 query2 query3; do<br>
+  claude --cache "$CONTEXT" "$query"<br>
+done<br><br>
+
+# Monitor token usage<br>
+claude --show-tokens --model claude-3-opus-20250219 \<br>
+  "Long prompt" | grep -i token
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>5. Building CLI Tools & Utilities</h3>
+                <p>Create reusable Claude-powered command-line tools.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+# claude-translator.sh<br><br>
+
+usage() {<br>
+  echo "Usage: $0 --from LANG --to LANG --file FILE"<br>
+}<br><br>
+
+translate() {<br>
+  local from=$1 to=$2 file=$3<br>
+  claude --system "Translate from $from to $to" \<br>
+    "Translate this: $(cat $file)"<br>
+}<br><br>
+
+while [[ $# -gt 0 ]]; do<br>
+  case $1 in<br>
+    --from) from=$2; shift 2 ;;<br>
+    --to) to=$2; shift 2 ;;<br>
+    --file) file=$2; shift 2 ;;<br>
+    *) usage; exit 1 ;;<br>
+  esac<br>
+done<br><br>
+
+translate "$from" "$to" "$file"
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section id="examples" class="section">
+            <h2>💡 Practical Examples</h2>
+
+            <div class="lesson-card">
+                <h3>Code Review Tool</h3>
+                <p>Automated code review using Claude CLI.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+claude --system "You are an expert code reviewer. \<br>
+Provide specific feedback on code quality, \<br>
+performance, and best practices." \<br>
+"Review this code:\n\n$(cat $1)"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Documentation Generator</h3>
+                <p>Generate documentation from code comments.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+claude --system "Generate clear, professional \<br>
+documentation in Markdown format." \<br>
+"Generate documentation for:\n\n$(cat README.md)"<br><br>
+
+# Save output<br>
+# ./gen-docs README.md > FULL_DOCS.md
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Git Commit Message Suggester</h3>
+                <p>Generate commit messages from code changes.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+DIFF=$(git diff --staged)<br>
+claude --system "Write a professional git commit \<br>
+message that clearly describes the changes" \<br>
+"Generate a commit message for:\n\n$DIFF"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>SQL Query Optimizer</h3>
+                <p>Optimize database queries with AI assistance.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+QUERY=$1<br>
+SCHEMA=$(cat schema.sql)<br><br>
+
+claude --system "You are a database expert. \<br>
+Optimize SQL queries for performance." \<br>
+"Database Schema:\n$SCHEMA\n\nOptimize: $QUERY"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Log Analyzer</h3>
+                <p>Analyze logs and identify issues.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+LOG_TAIL=$(tail -100 app.log)<br><br>
+
+claude --system "Analyze logs and identify \<br>
+potential issues and their causes." \<br>
+"Analyze these logs:\n\n$LOG_TAIL"
+                    </code>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>API Response Interpreter</h3>
+                <p>Understand and debug API responses.</p>
+                <div class="code-block">
+                    <code>
+#!/bin/bash<br>
+RESPONSE=$(curl -s $1)<br><br>
+
+claude --system "Explain API responses clearly" \<br>
+       --json \<br>
+"Explain this API response:\n\n$RESPONSE"
+                    </code>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Claude CLI Learning Guide | Master the Command Line</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
