@@ -1,0 +1,3 @@
+https://www.markdownguide.org/cheat-sheet/
+https://github.com/kierunb/CopilotCheatSheet
+https://github.com/features/copilot/cli

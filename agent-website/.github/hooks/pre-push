@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Run build and tests before pushing. If either fails, prevent push.
+set -e
+
+echo "Running pre-push checks: build + tests"
+
+if command -v npm >/dev/null 2>&1; then
+  echo "Building site..."
+  npm run build --silent || { echo "Build failed"; exit 1; }
+
+  echo "Running tests..."
+  npm test --silent || { echo "Tests failed"; exit 1; }
+else
+  echo "npm not found; skipping build and tests"
+fi
+
+echo "pre-push checks passed"

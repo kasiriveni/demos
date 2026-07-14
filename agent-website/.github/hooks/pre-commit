@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Run tests before committing. Exit non-zero to stop the commit if tests fail.
+set -e
+
+echo "Running pre-commit checks: vitest tests"
+if command -v npm >/dev/null 2>&1; then
+  npm test --silent
+else
+  echo "npm not found; skipping tests"
+fi
+
+echo "pre-commit checks passed"

@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Copilot Agent Customizations - Master Guide</title>
+    <!-- Original single stylesheet (kept as reference): <link rel="stylesheet" href="assets/css/styles.css"> -->
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/utilities.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-robot"></i>
+                <span>Agent Customizations</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#agents">Agents</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#instructions">Instructions</a></li>
+                <li><a href="#prompts">Prompts</a></li>
+                <li><a href="#hooks">Hooks</a></li>
+                <li><a href="#mcp">MCP Servers</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">GitHub Copilot Agent Customizations</h1>
+                <p class="hero-subtitle">Master AI-Assisted Development with Custom Agents, Skills, and MCP Servers</p>
+                <div class="hero-buttons">
+                    <a href="#overview" class="btn btn-primary">Get Started</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prompts Section -->
+    <section id="prompts" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Templates</span>
+                <h2 class="section-title">Prompts</h2>
+                <p class="section-description">Reusable prompt templates and engineering patterns</p>
+            </div>
+
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <h4>Generate CRUD Endpoint</h4>
+                    <pre><code>Generate a RESTful CRUD endpoint for the entity "{{Entity}}" using {{Framework}}. Include validation, tests, and API docs.</code></pre>
+                </div>
+                <div class="prompt-card">
+                    <h4>Explain Code</h4>
+                    <pre><code>Explain the following code snippet in simple terms and highlight potential pitfalls:
+{{code_block}}</code></pre>
+                </div>
+                <div class="prompt-card">
+                    <h4>Refactor For Readability</h4>
+                    <pre><code>Refactor the following function to improve readability and performance. Keep behavior identical and add tests:
+{{code_block}}</code></pre>
+                </div>
+                <div class="prompt-card">
+                    <h4>Security Review</h4>
+                    <pre><code>Perform a security review of this module. List vulnerabilities, severity, and suggested fixes:
+{{module_files}}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hooks Section -->
+    <section id="hooks" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Automation</span>
+                <h2 class="section-title">Hooks</h2>
+                <p class="section-description">Common hook points and examples to automate workflows</p>
+            </div>
+
+            <div class="hooks-grid">
+                <div class="hook-card">
+                    <h4>Before Commit</h4>
+                    <p>Run linters, formatters, and quick tests before allowing commits. Example action list:</p>
+                    <ul>
+                        <li>Run formatter (Prettier/Black)</li>
+                        <li>Run ESLint or equivalent</li>
+                        <li>Run unit tests for changed files</li>
+                    </ul>
+                </div>
+
+                <div class="hook-card">
+                    <h4>After Push / CI</h4>
+                    <p>Trigger longer-running analysis and report generation in CI:</p>
+                    <ul>
+                        <li>Full test suite</li>
+                        <li>Security scan</li>
+                        <li>Generate docs and coverage report</li>
+                    </ul>
+                </div>
+
+                <div class="hook-card">
+                    <h4>On File Save</h4>
+                    <p>Developer conveniences to improve feedback loop:</p>
+                    <ul>
+                        <li>Auto-format file</li>
+                        <li>Run quick static checks</li>
+                        <li>Show inline suggestions from agents</li>
+                    </ul>
+                </div>
+
+                <div class="hook-card">
+                    <h4>Custom Workflow</h4>
+                    <p>Example: When a new feature branch is pushed, run:</p>
+                    <ol>
+                        <li>Static analysis</li>
+                        <li>Generate acceptance tests</li>
+                        <li>Create a preliminary changelog draft</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Introduction</span>
+                <h2 class="section-title">Overview</h2>
+                <p class="section-description">Understanding the fundamentals of Agent Customizations</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card feature-card">
+                    <div class="card-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>What are Agent Customizations?</h3>
+                    <p>Customize GitHub Copilot's behavior to match your team's coding standards, workflows, and project requirements.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="card-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Configuration Hierarchy</h3>
+                    <p>Understand local vs workspace customizations, personal vs team settings, and where configuration files are stored.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Personal vs Team</h3>
+                    <p>Configure personal preferences or share settings across your entire development team for consistency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agents Section -->
+    <section id="agents" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">⭐ Core Feature</span>
+                <h2 class="section-title">Agents</h2>
+                <p class="section-description">Build powerful custom agents for specialized development tasks</p>
+            </div>
+
+            <div class="content-layout">
+                <div class="content-main">
+                    <div class="topic-group">
+                        <h3 class="topic-title">
+                            <i class="fas fa-graduation-cap"></i>
+                            Basics
+                        </h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> What is an Agent?
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>An Agent is an AI-powered assistant that can understand context, execute tasks autonomously, and interact with your codebase. Unlike simple chatbots, agents can plan multi-step workflows, use tools, and make decisions based on the project context.</p>
+                                    <p><strong>Key Features:</strong></p>
+                                    <ul>
+                                        <li>Autonomous task execution</li>
+                                        <li>Context-aware decision making</li>
+                                        <li>Tool and API integration</li>
+                                        <li>Multi-step planning capabilities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Agent vs Chat
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p><strong>Chat:</strong> Simple Q&A interface with immediate responses. Limited to single-turn interactions.</p>
+                                    <p><strong>Agent:</strong> Can execute complex, multi-step tasks autonomously. Maintains context across interactions, can use tools, make plans, and work independently toward goals.</p>
+                                    <p>Think of chat as a conversation, while an agent is a collaborator that can actually do work for you.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Agent Lifecycle
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>The agent lifecycle consists of several phases:</p>
+                                    <ol>
+                                        <li><strong>Initialization:</strong> Agent loads configuration and instructions</li>
+                                        <li><strong>Context Gathering:</strong> Analyzes workspace, files, and dependencies</li>
+                                        <li><strong>Planning:</strong> Creates a strategy to accomplish the task</li>
+                                        <li><strong>Execution:</strong> Carries out the plan using available tools</li>
+                                        <li><strong>Verification:</strong> Checks results and iterates if needed</li>
+                                        <li><strong>Completion:</strong> Reports results and updates state</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Agent Persona
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Agent Persona defines the personality, communication style, and behavior patterns of your agent. This includes:</p>
+                                    <ul>
+                                        <li><strong>Expertise Level:</strong> Junior dev, senior engineer, architect</li>
+                                        <li><strong>Communication Style:</strong> Formal, casual, technical, educational</li>
+                                        <li><strong>Focus Areas:</strong> Security, performance, testing, documentation</li>
+                                        <li><strong>Decision Making:</strong> Conservative, aggressive, balanced</li>
+                                    </ul>
+                                    <p>Example: A "Security-First Agent" would prioritize vulnerability scanning and secure coding practices in all suggestions.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Agent Capabilities
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Agents can perform various capabilities:</p>
+                                    <ul>
+                                        <li><strong>Code Generation:</strong> Write new code from scratch</li>
+                                        <li><strong>Code Analysis:</strong> Review and understand existing code</li>
+                                        <li><strong>Refactoring:</strong> Improve code structure and quality</li>
+                                        <li><strong>Testing:</strong> Generate and run tests</li>
+                                        <li><strong>Documentation:</strong> Create comprehensive docs</li>
+                                        <li><strong>Debugging:</strong> Find and fix issues</li>
+                                        <li><strong>Tool Integration:</strong> Connect to external services</li>
+                                        <li><strong>Workflow Automation:</strong> Automate repetitive tasks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topic-group">
+                        <h3 class="topic-title">
+                            <i class="fas fa-rocket"></i>
+                            Advanced
+                        </h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Multi-Agent Architecture
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>A system where multiple specialized agents work together, each handling specific aspects of development:</p>
+                                    <ul>
+                                        <li><strong>Frontend Agent:</strong> Handles UI/UX code</li>
+                                        <li><strong>Backend Agent:</strong> Manages API and business logic</li>
+                                        <li><strong>Database Agent:</strong> Optimizes queries and schemas</li>
+                                        <li><strong>DevOps Agent:</strong> Handles deployment and infrastructure</li>
+                                    </ul>
+                                    <p>Each agent operates independently but can coordinate through a master orchestrator.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Agent Collaboration
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Agents can work together by sharing context, results, and coordinating actions. For example:</p>
+                                    <p>A Code Review Agent identifies issues → Security Agent checks vulnerabilities → Testing Agent generates tests → Documentation Agent updates docs.</p>
+                                    <p>This creates a comprehensive development pipeline automated by AI agents.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Agent Delegation
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>When an agent encounters a task outside its expertise, it can delegate to another specialized agent. For example, a React Agent working on a component might delegate database query optimization to a SQL Agent.</p>
+                                    <p>This enables specialization while maintaining flexibility.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Tool Calling
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Agents can invoke external tools and APIs to extend their capabilities:</p>
+                                    <ul>
+                                        <li>Run terminal commands</li>
+                                        <li>Execute API requests</li>
+                                        <li>Query databases</li>
+                                        <li>Access file systems</li>
+                                        <li>Call third-party services (GitHub, Jira, etc.)</li>
+                                    </ul>
+                                    <p>Tools are defined with schemas that specify inputs, outputs, and usage patterns.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Autonomous Coding
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Agents can write entire features or fix bugs without human intervention. The agent:</p>
+                                    <ol>
+                                        <li>Analyzes the requirements</li>
+                                        <li>Plans the implementation</li>
+                                        <li>Writes the code</li>
+                                        <li>Runs tests</li>
+                                        <li>Fixes any issues</li>
+                                        <li>Creates documentation</li>
+                                        <li>Submits for review</li>
+                                    </ol>
+                                    <p>All while following your coding standards and best practices.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Planning & Memory
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p><strong>Planning:</strong> Agents break down complex tasks into actionable steps, creating a roadmap before execution.</p>
+                                    <p><strong>Memory:</strong> Agents maintain context across sessions:</p>
+                                    <ul>
+                                        <li><strong>Short-term:</strong> Current conversation and task context</li>
+                                        <li><strong>Long-term:</strong> Project patterns, preferences, and historical decisions</li>
+                                        <li><strong>Semantic:</strong> Understanding of codebase structure and relationships</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Context Management
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Managing what information the agent has access to:</p>
+                                    <ul>
+                                        <li><strong>Workspace Context:</strong> Project files, structure, dependencies</li>
+                                        <li><strong>Git Context:</strong> History, branches, commits</li>
+                                        <li><strong>Environment Context:</strong> System info, installed tools</li>
+                                        <li><strong>User Context:</strong> Preferences, patterns, conventions</li>
+                                    </ul>
+                                    <p>Effective context management ensures relevant information without overwhelming the agent.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span class="check-icon">✓</span> Long-running Tasks
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Agents can handle tasks that take hours or days:</p>
+                                    <ul>
+                                        <li>Migrating entire codebases</li>
+                                        <li>Refactoring large applications</li>
+                                        <li>Generating comprehensive test suites</li>
+                                        <li>Building complete features</li>
+                                    </ul>
+                                    <p>The agent can pause, resume, handle interruptions, and provide progress updates throughout the process.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-sidebar">
+                    <div class="practice-box">
+                        <h4><i class="fas fa-code"></i> Practice Agents</h4>
+                        <div class="practice-tags">
+                            <span class="tag">React Agent</span>
+                            <span class="tag">Python Agent</span>
+                            <span class="tag">DevOps Agent</span>
+                            <span class="tag">Database Agent</span>
+                            <span class="tag">Code Review Agent</span>
+                            <span class="tag">Test Automation</span>
+                            <span class="tag">Documentation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">⭐ Core Feature</span>
+                <h2 class="section-title">Skills</h2>
+                <p class="section-description">Reusable capabilities that supercharge your agents</p>
+            </div>
+
+            <div class="two-column-layout">
+                <div class="column">
+                    <h3 class="column-title">
+                        <i class="fas fa-book"></i>
+                        Topics to Master
+                    </h3>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>What are Skills?</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Skills are reusable, modular capabilities that agents can execute. They encapsulate specific knowledge and procedures for common tasks like generating APIs, running tests, or optimizing code.</p>
+                                <p>Think of skills as specialized functions that your agent can call upon when needed.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Skill Structure & Files</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>A skill typically consists of:</p>
+                                <ul>
+                                    <li><strong>SKILL.md:</strong> Main skill definition and instructions</li>
+                                    <li><strong>metadata.json:</strong> Skill configuration and parameters</li>
+                                    <li><strong>examples/:</strong> Usage examples and test cases</li>
+                                    <li><strong>templates/:</strong> Code templates and patterns</li>
+                                </ul>
+                                <p>Skills are organized in a directory structure that makes them easy to discover and use.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Inputs & Outputs</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p><strong>Inputs:</strong> Parameters, context, and data the skill needs to execute (e.g., file paths, configuration options, user preferences).</p>
+                                <p><strong>Outputs:</strong> Generated code, files, reports, or data structures that result from executing the skill.</p>
+                                <p>Well-defined inputs and outputs make skills composable and predictable.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Skill Parameters</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Parameters customize skill behavior:</p>
+                                <ul>
+                                    <li><strong>Required:</strong> Must be provided (e.g., entity name)</li>
+                                    <li><strong>Optional:</strong> Have defaults (e.g., output format)</li>
+                                    <li><strong>Flags:</strong> Boolean options (e.g., include tests)</li>
+                                </ul>
+                                <p>Example: <code>generate-api --entity=User --format=REST --with-tests</code></p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Skill Chaining</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Connect multiple skills together where the output of one becomes the input of another:</p>
+                                <p><code>Generate API → Add Validation → Generate Tests → Create Docs</code></p>
+                                <p>This creates powerful automated workflows for complex tasks.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Reusable Skills</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Skills are designed to work across different projects and contexts. A "Generate CRUD" skill can work for any entity in any framework.</p>
+                                <p>Benefits:</p>
+                                <ul>
+                                    <li>DRY principle for AI instructions</li>
+                                    <li>Consistent patterns across projects</li>
+                                    <li>Share skills across teams</li>
+                                    <li>Build skill libraries</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Skill Versioning</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Track skill versions to ensure compatibility and manage updates:</p>
+                                <ul>
+                                    <li><strong>v1.0.0:</strong> Initial release</li>
+                                    <li><strong>v1.1.0:</strong> New features added</li>
+                                    <li><strong>v2.0.0:</strong> Breaking changes</li>
+                                </ul>
+                                <p>Use semantic versioning to communicate changes clearly.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Domain-specific Skills</span>
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Specialized skills for particular domains:</p>
+                                <ul>
+                                    <li><strong>DevOps:</strong> Docker, Kubernetes, Terraform</li>
+                                    <li><strong>Database:</strong> SQL optimization, migration generation</li>
+                                    <li><strong>Frontend:</strong> React components, responsive layouts</li>
+                                    <li><strong>Backend:</strong> API endpoints, authentication</li>
+                                    <li><strong>Security:</strong> Vulnerability scanning, secure patterns</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h3 class="column-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Skill Examples
+                    </h3>
+                    <div class="example-cards">
+                        <div class="example-card">
+                            <div class="example-icon"><i class="fas fa-server"></i></div>
+                            <h4>Generate REST API</h4>
+                            <p>Automatically scaffold RESTful APIs with best practices</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-icon"><i class="fas fa-vial"></i></div>
+                            <h4>Generate Unit Tests</h4>
+                            <p>Create comprehensive test suites automatically</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-icon"><i class="fas fa-database"></i></div>
+                            <h4>SQL Optimization</h4>
+                            <p>Analyze and optimize database queries</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-icon"><i class="fab fa-docker"></i></div>
+                            <h4>Docker Skill</h4>
+                            <p>Container management and optimization</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-icon"><i class="fas fa-dharmachakra"></i></div>
+                            <h4>Kubernetes Skill</h4>
+                            <p>Orchestration and deployment automation</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-icon"><i class="fab fa-react"></i></div>
+                            <h4>React Component</h4>
+                            <p>Generate reusable React components</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section id="instructions" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">⭐ Core Feature</span>
+                <h2 class="section-title">Instructions</h2>
+                <p class="section-description">Define the AI's always-on behavior and coding standards</p>
+            </div>
+
+            <div class="instructions-grid">
+                <div class="instruction-category">
+                    <h3><i class="fas fa-globe"></i> Instruction Types</h3>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Global Instructions
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Global instructions apply across all projects and workspaces for your user account. They define your personal coding style and preferences that should always be followed.</p>
+                                <p><strong>Examples:</strong></p>
+                                <ul>
+                                    <li>Always use TypeScript over JavaScript</li>
+                                    <li>Prefer functional programming patterns</li>
+                                    <li>Use 2 spaces for indentation</li>
+                                    <li>Write descriptive commit messages</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Project Instructions
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Project-specific instructions that apply only within a particular workspace or repository. These override global instructions and define project-specific standards.</p>
+                                <p><strong>Use cases:</strong></p>
+                                <ul>
+                                    <li>Framework-specific patterns (React, Vue, Angular)</li>
+                                    <li>API conventions for this project</li>
+                                    <li>Database schema naming rules</li>
+                                    <li>Component structure guidelines</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Personal Instructions
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Your individual preferences that shape how the AI interacts with you, regardless of the project.</p>
+                                <p><strong>Examples:</strong></p>
+                                <ul>
+                                    <li>Explain code changes in detail</li>
+                                    <li>Always suggest performance optimizations</li>
+                                    <li>Prioritize code readability over brevity</li>
+                                    <li>Include inline comments for complex logic</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-category">
+                    <h3><i class="fas fa-code"></i> Coding Standards</h3>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Naming Conventions
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Define how variables, functions, classes, and files should be named throughout your codebase.</p>
+                                <p><strong>Common conventions:</strong></p>
+                                <ul>
+                                    <li><code>camelCase</code> for variables and functions</li>
+                                    <li><code>PascalCase</code> for classes and components</li>
+                                    <li><code>UPPER_SNAKE_CASE</code> for constants</li>
+                                    <li><code>kebab-case</code> for file names</li>
+                                    <li>Descriptive names over abbreviations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Architecture Rules
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Guidelines for organizing code structure and system design patterns.</p>
+                                <p><strong>Examples:</strong></p>
+                                <ul>
+                                    <li>Follow MVC/MVVM patterns</li>
+                                    <li>Implement clean architecture layers</li>
+                                    <li>Use dependency injection</li>
+                                    <li>Separate concerns (business logic, UI, data)</li>
+                                    <li>Apply SOLID principles</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Testing Rules
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Standards for writing and organizing tests across your codebase.</p>
+                                <p><strong>Guidelines:</strong></p>
+                                <ul>
+                                    <li>Write unit tests for all business logic</li>
+                                    <li>Aim for 80%+ code coverage</li>
+                                    <li>Use descriptive test names</li>
+                                    <li>Follow AAA pattern (Arrange, Act, Assert)</li>
+                                    <li>Mock external dependencies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-category">
+                    <h3><i class="fas fa-shield-alt"></i> Quality Rules</h3>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Security Rules
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Security best practices that must be followed in all code.</p>
+                                <p><strong>Requirements:</strong></p>
+                                <ul>
+                                    <li>Never hardcode secrets or API keys</li>
+                                    <li>Sanitize all user inputs</li>
+                                    <li>Use parameterized queries (prevent SQL injection)</li>
+                                    <li>Implement proper authentication/authorization</li>
+                                    <li>Keep dependencies updated</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Performance Rules
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Guidelines for writing efficient, performant code.</p>
+                                <p><strong>Best practices:</strong></p>
+                                <ul>
+                                    <li>Optimize database queries (indexes, eager loading)</li>
+                                    <li>Use caching where appropriate</li>
+                                    <li>Avoid N+1 query problems</li>
+                                    <li>Lazy load resources when possible</li>
+                                    <li>Profile and measure before optimizing</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Documentation Rules
+                                <i class="fas fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Standards for documenting code and maintaining project documentation.</p>
+                                <p><strong>Requirements:</strong></p>
+                                <ul>
+                                    <li>Document all public APIs and functions</li>
+                                    <li>Keep README files up to date</li>
+                                    <li>Add JSDoc/TypeDoc comments</li>
+                                    <li>Document complex algorithms inline</li>
+                                    <li>Maintain architecture decision records (ADRs)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-example">
+                <div class="code-header">
+                    <span><i class="fas fa-file-code"></i> Example Instructions</span>
+                    <button class="copy-btn" data-copy="instructions-code">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code id="instructions-code">Always use TypeScript.
+Write clean code.
+Use async/await.
+Follow SOLID principles.
+Generate unit tests.
+Use ESLint.
+Never use console.log in production.</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- MCP Servers Section -->
+    <section id="mcp" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">⭐⭐⭐ Most Important</span>
+                <h2 class="section-title">MCP Servers</h2>
+                <p class="section-description">Model Context Protocol - Connect to external services and data</p>
+            </div>
+
+            <div class="mcp-content">
+                <div class="mcp-intro">
+                    <h3>What is MCP?</h3>
+                    <p>The Model Context Protocol (MCP) is one of the most important advanced topics. It enables agents to connect to external services, databases, and APIs, providing rich contextual information.</p>
+                </div>
+
+                <div class="mcp-sections">
+                    <div class="mcp-section">
+                        <h4><i class="fas fa-info-circle"></i> Basics</h4>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    What is MCP?
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>The Model Context Protocol (MCP) is a standardized protocol that allows AI agents to connect with external data sources, tools, and services. It provides a unified way to extend agent capabilities beyond their built-in knowledge.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Why MCP?
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>MCP solves the problem of agents needing real-time, contextual information:</p>
+                                    <ul>
+                                        <li>Access live data from databases and APIs</li>
+                                        <li>Connect to development tools (GitHub, Jira, CI/CD)</li>
+                                        <li>Standardized protocol across different AI models</li>
+                                        <li>Secure, controlled access to resources</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    MCP Architecture
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>MCP uses a client-server architecture:</p>
+                                    <ul>
+                                        <li><strong>Client:</strong> The AI agent that requests information</li>
+                                        <li><strong>Server:</strong> Provides access to specific resources or capabilities</li>
+                                        <li><strong>Protocol:</strong> Defines how messages are exchanged</li>
+                                        <li><strong>Transport:</strong> The communication channel (stdio, HTTP, WebSocket)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Client & Server
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p><strong>MCP Client:</strong> Integrated into AI assistants (like GitHub Copilot), sends requests to servers.</p>
+                                    <p><strong>MCP Server:</strong> Standalone service that exposes tools, resources, and prompts to clients. Can be written in any language.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Transport Layer
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>The transport layer handles communication between client and server. Supports multiple protocols based on deployment needs (local process, remote service, etc.).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mcp-section">
+                        <h4><i class="fas fa-exchange-alt"></i> Communication</h4>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    JSON-RPC
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>MCP uses JSON-RPC 2.0 for message formatting - a lightweight remote procedure call protocol that encodes messages as JSON. Enables structured requests and responses with method names, parameters, and results.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    stdio
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Standard input/output communication - perfect for local MCP servers running as subprocesses. Fast and efficient for single-machine setups. The agent launches the server and communicates through stdin/stdout.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    HTTP
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Traditional HTTP request-response for remote MCP servers. Widely supported, works across networks, good for stateless operations. Can be secured with HTTPS and standard authentication.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Server-Sent Events (SSE)
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>One-way streaming from server to client over HTTP. Useful for real-time updates, progress notifications, and streaming responses from MCP servers without full WebSocket overhead.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    WebSocket
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Full-duplex bidirectional communication channel. Best for real-time, interactive MCP servers that need to push updates or maintain stateful connections. More complex but most flexible.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mcp-section">
+                        <h4><i class="fas fa-tools"></i> Tools & Resources</h4>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Tool Discovery
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>The process by which agents learn what capabilities an MCP server provides. Servers advertise available tools with their names, descriptions, and parameters, allowing agents to understand what they can do.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Tool Calling
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>When an agent invokes a tool from an MCP server, passing parameters and receiving results. The agent decides when and how to use tools based on the task at hand.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Resources
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Data sources that MCP servers can expose: files, database records, API responses, documentation, etc. Resources provide context that agents can use to make informed decisions.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Prompts
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Pre-configured prompt templates that MCP servers can provide to agents. These guide how agents interact with the server's capabilities and format their requests.</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Context Sharing
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>How MCP enables agents to access and share relevant context: workspace info, user preferences, project state. This makes agents context-aware and more effective.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mcp-section">
+                        <h4><i class="fas fa-hammer"></i> Build MCP Servers</h4>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Python MCP Server
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>Build MCP servers using Python - ideal for data science, ML integration, and rapid development. Use official MCP SDK for Python to define tools and resources.</p>
+                                    <p><strong>Great for:</strong> Database queries, data analysis, file processing, API integrations</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    Node.js MCP Server
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>JavaScript/Node.js MCP servers for web services, real-time features, and JavaScript ecosystem integration. Excellent performance for I/O-heavy operations.</p>
+                                    <p><strong>Great for:</strong> Web APIs, WebSocket services, npm package integration</p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    TypeScript MCP Server
+                                    <i class="fas fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>TypeScript adds type safety to Node.js MCP servers. Get compile-time error checking, better IDE support, and more maintainable code for complex servers.</p>
+                                    <p><strong>Great for:</strong> Large-scale servers, team projects, type-safe API definitions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mcp-connections">
+                    <h3>MCP Connections</h3>
+                    <div class="connection-tags">
+                        <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/github" target="_blank" class="connection-tag"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fab fa-microsoft"></i> Azure DevOps</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fab fa-jira"></i> Jira</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fab fa-confluence"></i> Confluence</a>
+                        <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres" target="_blank" class="connection-tag"><i class="fas fa-database"></i> PostgreSQL</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fas fa-database"></i> MySQL</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fas fa-database"></i> MongoDB</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fas fa-database"></i> Redis</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fab fa-docker"></i> Docker</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fas fa-dharmachakra"></i> Kubernetes</a>
+                        <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/aws-kb-retrieval" target="_blank" class="connection-tag"><i class="fab fa-aws"></i> AWS</a>
+                        <a href="https://github.com/modelcontextprotocol/servers" target="_blank" class="connection-tag"><i class="fab fa-microsoft"></i> Azure</a>
+                        <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem" target="_blank" class="connection-tag"><i class="fas fa-file"></i> Local Files</a>
+                        <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/fetch" target="_blank" class="connection-tag"><i class="fas fa-plug"></i> REST APIs</a>
+                    </div>
+                </div>
+
+                <div class="mcp-advanced">
+                    <h3>Advanced Topics</h3>
+                    <div class="advanced-grid">
+                        <div class="advanced-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Authentication & Authorization</span>
+                        </div>
+                        <div class="advanced-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security</span>
+                        </div>
+                        <div class="advanced-item">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Error Handling</span>
+                        </div>
+                        <div class="advanced-item">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Logging</span>
+                        </div>
+                        <div class="advanced-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Performance</span>
+                        </div>
+                        <div class="advanced-item">
+                            <i class="fas fa-memory"></i>
+                            <span>Caching</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section id="learning-path" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Roadmap</span>
+                <h2 class="section-title">15-Day Learning Plan</h2>
+                <p class="section-description">Structured path to mastering Agent Customizations</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Overview & Architecture</h4>
+                        <p>Understand the foundation and system design</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Agents</h4>
+                        <p>Learn to create and customize agents</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Skills</h4>
+                        <p>Build reusable capabilities</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>Instructions</h4>
+                        <p>Define behavior and standards</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <h4>Prompts</h4>
+                        <p>Master prompt engineering</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">6</div>
+                    <div class="timeline-content">
+                        <h4>Hooks</h4>
+                        <p>Automate development actions</p>
+                    </div>
+                </div>
+                <div class="timeline-item highlight">
+                    <div class="timeline-marker">7-9</div>
+                    <div class="timeline-content">
+                        <h4>MCP Servers</h4>
+                        <p>Deep dive into Model Context Protocol</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">10</div>
+                    <div class="timeline-content">
+                        <h4>Plugins</h4>
+                        <p>Extend functionality with plugins</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">11</div>
+                    <div class="timeline-content">
+                        <h4>Workspace Context</h4>
+                        <p>Understand how agents see your code</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">12</div>
+                    <div class="timeline-content">
+                        <h4>Prompt Engineering</h4>
+                        <p>Advanced prompting techniques</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">13</div>
+                    <div class="timeline-content">
+                        <h4>Building Custom Agents</h4>
+                        <p>Create production-ready agents</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">14</div>
+                    <div class="timeline-content">
+                        <h4>Enterprise Configuration</h4>
+                        <p>Scale to organization level</p>
+                    </div>
+                </div>
+                <div class="timeline-item highlight">
+                    <div class="timeline-marker">15</div>
+                    <div class="timeline-content">
+                        <h4>End-to-End Project</h4>
+                        <p>Build a complete solution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Practice</span>
+                <h2 class="section-title">15 Real-World Agent Projects</h2>
+                <p class="section-description">Build these custom agents to master the concepts</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-number">01</div>
+                    <div class="project-icon"><i class="fab fa-react"></i></div>
+                    <h3>React Development Agent</h3>
+                    <p>Build a specialized agent for React development with component generation and optimization</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Frontend</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">02</div>
+                    <div class="project-icon"><i class="fab fa-python"></i></div>
+                    <h3>Python Backend Agent</h3>
+                    <p>Create backend services with FastAPI, Django, and Flask best practices</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Backend</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">03</div>
+                    <div class="project-icon"><i class="fab fa-node-js"></i></div>
+                    <h3>Node.js API Agent</h3>
+                    <p>Build scalable REST and GraphQL APIs with Node.js and Express</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">API</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">04</div>
+                    <div class="project-icon"><i class="fas fa-database"></i></div>
+                    <h3>SQL Database Agent</h3>
+                    <p>Design schemas, optimize queries, and manage migrations</p>
+                    <div class="project-tags">
+                        <span class="project-tag">SQL</span>
+                        <span class="project-tag">Database</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">05</div>
+                    <div class="project-icon"><i class="fas fa-server"></i></div>
+                    <h3>DevOps Agent</h3>
+                    <p>Automate CI/CD pipelines and infrastructure management</p>
+                    <div class="project-tags">
+                        <span class="project-tag">DevOps</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">06</div>
+                    <div class="project-icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h3>Kubernetes Agent</h3>
+                    <p>Orchestrate containers and manage Kubernetes deployments</p>
+                    <div class="project-tags">
+                        <span class="project-tag">K8s</span>
+                        <span class="project-tag">Cloud</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">07</div>
+                    <div class="project-icon"><i class="fab fa-microsoft"></i></div>
+                    <h3>Azure Agent</h3>
+                    <p>Deploy and manage Azure cloud resources and services</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Azure</span>
+                        <span class="project-tag">Cloud</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">08</div>
+                    <div class="project-icon"><i class="fab fa-aws"></i></div>
+                    <h3>AWS Agent</h3>
+                    <p>Architect and deploy AWS infrastructure as code</p>
+                    <div class="project-tags">
+                        <span class="project-tag">AWS</span>
+                        <span class="project-tag">Cloud</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">09</div>
+                    <div class="project-icon"><i class="fas fa-search"></i></div>
+                    <h3>Code Review Agent</h3>
+                    <p>Automated code reviews with security and quality checks</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Quality</span>
+                        <span class="project-tag">Security</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">10</div>
+                    <div class="project-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Security Audit Agent</h3>
+                    <p>Scan for vulnerabilities and security best practices</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Security</span>
+                        <span class="project-tag">Audit</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">11</div>
+                    <div class="project-icon"><i class="fas fa-book"></i></div>
+                    <h3>Documentation Agent</h3>
+                    <p>Generate comprehensive documentation automatically</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Docs</span>
+                        <span class="project-tag">Writing</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">12</div>
+                    <div class="project-icon"><i class="fas fa-vial"></i></div>
+                    <h3>Test Automation Agent</h3>
+                    <p>Create unit, integration, and E2E tests</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Testing</span>
+                        <span class="project-tag">QA</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">13</div>
+                    <div class="project-icon"><i class="fas fa-brain"></i></div>
+                    <h3>RAG Development Agent</h3>
+                    <p>Build Retrieval-Augmented Generation applications</p>
+                    <div class="project-tags">
+                        <span class="project-tag">RAG</span>
+                        <span class="project-tag">AI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">14</div>
+                    <div class="project-icon"><i class="fas fa-link"></i></div>
+                    <h3>LangChain Agent</h3>
+                    <p>Develop LangChain chains and agents</p>
+                    <div class="project-tags">
+                        <span class="project-tag">LangChain</span>
+                        <span class="project-tag">AI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">15</div>
+                    <div class="project-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI Assistant Agent</h3>
+                    <p>Build intelligent assistants for various tasks</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Assistant</span>
+                        <span class="project-tag">AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Topics Section -->
+    <section id="additional" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">More Topics</span>
+                <h2 class="section-title">Additional Features</h2>
+            </div>
+
+            <div class="additional-grid">
+                <div class="additional-card">
+                    <h3><i class="fas fa-puzzle-piece"></i> Prompts</h3>
+                    <ul>
+                        <li>Prompt Templates</li>
+                        <li>Reusable Prompts</li>
+                        <li>Variables & Chaining</li>
+                        <li>Prompt Library</li>
+                        <li>Versioning</li>
+                    </ul>
+                    <div class="examples-box">
+                        <strong>Examples:</strong> Generate CRUD, Explain Code, Refactor, Create Documentation
+                    </div>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-bolt"></i> Hooks</h3>
+                    <ul>
+                        <li>Trigger Events</li>
+                        <li>Before/After Save</li>
+                        <li>Before/After Commit</li>
+                        <li>Build & Test Hooks</li>
+                        <li>Deployment Hook</li>
+                    </ul>
+                    <div class="examples-box">
+                        <strong>Examples:</strong> Run Formatter, ESLint, Tests, Generate Docs
+                    </div>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-plug"></i> Plugins</h3>
+                    <ul>
+                        <li>Plugin Architecture</li>
+                        <li>Installation</li>
+                        <li>Configuration</li>
+                        <li>Security</li>
+                        <li>Custom Plugins</li>
+                    </ul>
+                    <div class="examples-box">
+                        <strong>Examples:</strong> Jira, Slack, GitHub, Docker, Kubernetes
+                    </div>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-folder-open"></i> Workspace Context</h3>
+                    <ul>
+                        <li>Open Files</li>
+                        <li>Active File</li>
+                        <li>Git Repository</li>
+                        <li>Project Structure</li>
+                        <li>Dependencies</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-brain"></i> Best Practices</h3>
+                    <ul>
+                        <li>Prompt Engineering</li>
+                        <li>Context Engineering</li>
+                        <li>Task Planning</li>
+                        <li>Code Review</li>
+                        <li>Debugging</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-building"></i> Enterprise</h3>
+                    <ul>
+                        <li>Multi-Repository Agents</li>
+                        <li>Organization Instructions</li>
+                        <li>Team Skills</li>
+                        <li>Shared MCP Servers</li>
+                        <li>Governance & Compliance</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-eye"></i> Observability</h3>
+                    <ul>
+                        <li>Logging</li>
+                        <li>Tracing</li>
+                        <li>Metrics</li>
+                        <li>Dashboards</li>
+                        <li>Alerts</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-universal-access"></i> Accessibility</h3>
+                    <ul>
+                        <li>Keyboard Navigation</li>
+                        <li>Screen Reader Support</li>
+                        <li>Contrast & Color</li>
+                        <li>Semantic HTML</li>
+                        <li>ARIA Attributes</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-coins"></i> Cost Optimization</h3>
+                    <ul>
+                        <li>Resource Sizing</li>
+                        <li>Autoscaling</li>
+                        <li>Spot Instances</li>
+                        <li>Budget Alerts</li>
+                        <li>Monitoring Spend</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-balance-scale-left"></i> AI Ethics</h3>
+                    <ul>
+                        <li>Bias Mitigation</li>
+                        <li>Transparency</li>
+                        <li>Responsible Use</li>
+                        <li>Privacy</li>
+                        <li>Governance</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-language"></i> Localization</h3>
+                    <ul>
+                        <li>i18n Support</li>
+                        <li>Translations</li>
+                        <li>Locale-aware Formatting</li>
+                        <li>RTL Support</li>
+                        <li>Regional Compliance</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-project-diagram"></i> CI/CD Best Practices</h3>
+                    <ul>
+                        <li>Pipeline Design</li>
+                        <li>Automated Tests</li>
+                        <li>Canary Releases</li>
+                        <li>Rollback Strategies</li>
+                        <li>Secrets Management</li>
+                    </ul>
+                </div>
+
+                <div class="additional-card">
+                    <h3><i class="fas fa-server"></i> Monitoring</h3>
+                    <ul>
+                        <li>Uptime Checks</li>
+                        <li>Health Endpoints</li>
+                        <li>Alerting Policies</li>
+                        <li>Incident Response</li>
+                        <li>Postmortems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-robot"></i> Agent Customizations</h4>
+                    <p>Master AI-assisted development with GitHub Copilot</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#agents">Agents</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#instructions">Instructions</a></li>
+                        <li><a href="#prompts">Prompts</a></li>
+                        <li><a href="#hooks">Hooks</a></li>
+                        <li><a href="#mcp">MCP Servers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#learning-path">Learning Path</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#additional">Topics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Recommended Focus</h4>
+                    <ul>
+                        <li>⭐ Agents</li>
+                        <li>⭐ Skills</li>
+                        <li>⭐⭐⭐ MCP Servers</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GitHub Copilot Agent Customizations Guide. Built for developers learning AI-assisted development.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top" title="Scroll to top">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

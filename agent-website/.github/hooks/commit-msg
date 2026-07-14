@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Enforce a lightweight Conventional Commits pattern on commit messages.
+set -e
+
+MSG_FILE="$1"
+MSG=$(cat "$MSG_FILE" || true)
+
+if [[ -z "$MSG" ]]; then
+  echo "Empty commit message not allowed"
+  exit 1
+fi
+
+# Simple conventional commit regex: type(optional-scope): description
+if ! echo "$MSG" | grep -Eq '^(feat|fix|docs|style|refactor|perf|test|chore)(\([^)]+\))?: .+'; then
+  echo "Commit message does not follow Conventional Commits format."
+  echo "Expected: <type>(optional-scope): <description>"
+  echo "Allowed types: feat, fix, docs, style, refactor, perf, test, chore"
+  exit 1
+fi
+
+echo "commit-msg: message format OK"
