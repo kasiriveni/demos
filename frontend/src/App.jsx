@@ -112,7 +112,7 @@ export default function App() {
     setLoading(true)
     setError(null)
     try {
-      await Promise.all(todos.map(t => api.deleteTodo(t.id)))
+      await api.bulkDelete(todos.map(t => t.id))
       setTodos([])
     } catch (err) {
       setError(err.message)

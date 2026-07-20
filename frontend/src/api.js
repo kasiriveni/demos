@@ -43,6 +43,15 @@ export async function deleteTodo(id) {
   return handleResponse(res);
 }
 
+export async function bulkDelete(ids) {
+  const res = await fetch(`${BASE}/todos/bulk-delete`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ids }),
+  });
+  return handleResponse(res);
+}
+
 export async function fetchTips() {
   const res = await fetch(`${BASE}/tips`);
   return handleResponse(res);
@@ -63,6 +72,7 @@ export default {
   createTodo,
   updateTodo,
   deleteTodo,
+  bulkDelete,
   fetchTips,
   fetchRandomTip,
   fetchTip,

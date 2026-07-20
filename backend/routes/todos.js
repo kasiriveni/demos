@@ -89,4 +89,30 @@ router.delete("/:id", (req, res) => {
   res.json(removed);
 });
 
+// POST /todos/bulk-delete - remove multiple todos by id
+router.post("/bulk-delete", (req, res) => {
+  const { ids } = req.body || {};
+  if (!Array.isArray(ids)) {
+    return res
+      .status(400)
+      .json({ error: 'Missing or invalid "ids" (expected string[])' });
+  }
+
+  const idSet = new Set(ids.filter((id) => typeof id === "string"));
+  let deletedCount = 0;
+  const remaining = [];
+  for (const todo of todos) {
+    if (idSet.has(todo.id)) {
+      deletedCount += 1;
+    } else {
+      remaining.push(todo);
+    }
+  }
+
+  todos = remaining;
+  if (deletedCount > 0) saveTodos(todos);
+
+  res.json({ deletedCount });
+});
+
 module.exports = router;

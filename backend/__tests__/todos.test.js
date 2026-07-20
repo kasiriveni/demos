@@ -227,6 +227,77 @@ describe("DELETE /todos/:id", () => {
   });
 });
 
+describe("POST /todos/bulk-delete", () => {
+  test("removes multiple todos and returns the count", async () => {
+    const a = await request(app).post("/todos").send({ title: "bulk a" });
+    const b = await request(app).post("/todos").send({ title: "bulk b" });
+    const c = await request(app).post("/todos").send({ title: "keep c" });
+
+    const res = await request(app)
+      .post("/todos/bulk-delete")
+      .send({ ids: [a.body.data.id, b.body.data.id] });
+
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toEqual({ deletedCount: 2 });
+
+    // c is still there, a/b are gone
+    const list = await request(app).get("/todos");
+    const ids = list.body.data.map((t) => t.id);
+    expect(ids).toContain(c.body.data.id);
+    expect(ids).not.toContain(a.body.data.id);
+    expect(ids).not.toContain(b.body.data.id);
+  });
+
+  test("returns 400 when ids is not an array", async () => {
+    const res = await request(app)
+      .post("/todos/bulk-delete")
+      .send({ ids: "not-an-array" });
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toMatch(/ids/);
+  });
+
+  test("returns 400 when ids is missing", async () => {
+    const res = await request(app).post("/todos/bulk-delete").send({});
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+  });
+
+  test("returns deletedCount: 0 when no ids match", async () => {
+    const res = await request(app)
+      .post("/todos/bulk-delete")
+      .send({ ids: ["does-not-exist-1", "does-not-exist-2"] });
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data).toEqual({ deletedCount: 0 });
+  });
+
+  test("isolated app: only the targeted ids are removed from a fresh seed", async () => {
+    const seed = [
+      { id: "s1", title: "s1", description: "", completed: false, createdAt: "x" },
+      { id: "s2", title: "s2", description: "", completed: false, createdAt: "x" },
+      { id: "s3", title: "s3", description: "", completed: false, createdAt: "x" },
+    ];
+    const isolatedApp = loadIsolatedApp({
+      fsMock: createFsMock({
+        readFileSync: jest.fn(() => JSON.stringify(seed)),
+      }),
+    });
+
+    const res = await request(isolatedApp)
+      .post("/todos/bulk-delete")
+      .send({ ids: ["s1", "s3"] });
+
+    expect(res.status).toBe(200);
+    expect(res.body.data).toEqual({ deletedCount: 2 });
+
+    const list = await request(isolatedApp).get("/todos");
+    const ids = list.body.data.map((t) => t.id);
+    expect(ids).toEqual(["s2"]);
+  });
+});
+
 describe("Todos module bootstrap", () => {
   test("falls back to an empty list when persisted todos cannot be loaded", async () => {
     const isolatedApp = loadIsolatedApp({

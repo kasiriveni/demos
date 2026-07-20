@@ -1,0 +1,11 @@
+This is a sample text file.
+
+It contains some example content to demonstrate a basic text file.
+You can edit this file as needed.
+
+Features:
+- Multiple lines
+- Simple structure
+- Easy to modify
+
+Created for demonstration purposes.
