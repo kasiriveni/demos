@@ -10,5 +10,9 @@ inv = {v: k for k, v in squares.items()}
 print(inv)
 
 # Set comprehension
+
 unique_lengths = {len(word) for word in ["hi", "hello", "hey", "yo"]}
 print(unique_lengths)
+
+
+print(["hi", "hello", "hey", "yo"])

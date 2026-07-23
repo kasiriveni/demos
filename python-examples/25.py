@@ -2,7 +2,7 @@
 # Variables have different scopes depending on where they are defined.
 
 x = "global"
-
+print(x)
 def outer():
     x = "enclosed"
     def inner():
@@ -12,4 +12,3 @@ def outer():
     print(x)
 
 outer()
-print(x)
