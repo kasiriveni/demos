@@ -128,4 +128,47 @@ Specific new examples (created recently):
 - `119.py`: `statistics` mean/median/mode.
 - `120.py`: `decimal` and `fractions` demonstration.
 
+Additional stdlib / deeper examples (newly added):
+
+- `121.py`: Structural pattern matching — `match`/`case` with literals, capture, OR, guard, sequence, and mapping patterns.
+- `122.py`: `functools.singledispatch` — type-dispatched function overloading.
+- `123.py`: Abstract Base Classes — `abc.ABC` + `@abstractmethod` + structural `isinstance` checks.
+- `124.py`: `typing.Protocol` — structural typing and `@runtime_checkable` interfaces.
+- `125.py`: Descriptors — building validation logic with `__get__`/`__set__`.
+- `126.py`: `__slots__` — fixed-layout classes that save memory and forbid new attributes.
+- `127.py`: Metaclasses — `type` subclassing and class-level registration.
+- `128.py`: `weakref` — weak references, `WeakValueDictionary`, and `finalize`.
+- `129.py`: `copy` — shallow vs deep copy semantics and custom `__copy__` / `__deepcopy__`.
+- `130.py`: Operator overloading — dunder methods, `@total_ordering`, hashing.
+- `131.py`: `enum` — `Enum`, `IntEnum`, `Flag`, `auto`, and `@unique`.
+- `132.py`: `contextvars` — per-task async-safe state.
+- `133.py`: `asyncio` cookbook — `gather`, `wait_for`, `TaskGroup`, `Queue`.
+- `134.py`: `mmap` — memory-mapped file I/O for large files.
+- `135.py`: `ipaddress` — IPv4/IPv6 parsing, networks, subnetting, membership.
+- `136.py`: `logging` cookbook — handlers, formatters, rotating files, per-module loggers.
+- `137.py`: Caching patterns — `lru_cache`, `cache`, and a TTL cache.
+- `138.py`: String formatting — format specs, `string.Template`, `str.format`.
+- `139.py`: `textwrap` and `pprint` — wrapping, dedent, shorten, pretty printing.
+- `140.py`: `difflib` and `filecmp` — sequence diffs, similarity, file comparison.
+- `141.py`: `itertools` recipes — `chain`, `groupby`, `islice`, `tee`, `takewhile`/`dropwhile`.
+- `142.py`: `functools` — `partial`, `reduce`, `total_ordering`, `cached_property`.
+- `143.py`: Compression — `gzip`/`bz2`/`lzma`/`zlib` and checksum helpers.
+- `144.py`: `typing` — `TypeVar`, `Generic`, `ParamSpec`, `TypeGuard`, `NewType`.
+- `145.py`: `argparse` advanced — subcommands, choices, custom types.
+- `146.py`: `importlib.resources` — read bundled package data files.
+- `147.py`: `dataclasses` + `operator` + `functools.reduce` data pipeline.
+- `148.py`: Encodings — UTF-8, `errors=`, built-in codecs, BOM.
+- `149.py`: `unittest` advanced — fixtures, mocks, subtests, skipping.
+- `150.py`: Process lifecycle — `atexit`, `signal`, `faulthandler`.
+- `151.py`: `tracemalloc` — find which call site allocated the most memory.
+- `152.py`: `gc` — reference cycles, the cycle collector, `weakref.finalize`.
+- `153.py`: `dis` — disassemble Python bytecode.
+- `154.py`: `contextlib` — `ExitStack`, `suppress`, `redirect_stdout`, `nullcontext`.
+- `155.py`: `typing.overload` — precise multi-signature function declarations.
+- `156.py`: `typing` — `Final`, `Literal`, `TypedDict`, `dataclasses.asdict`.
+- `157.py`: `tomllib` — parse TOML configuration (3.11+).
+- `158.py`: `reprlib` and `warnings` — friendly output and deprecation signals.
+- `159.py`: `multiprocessing.shared_memory` — zero-copy inter-process buffers.
+- `160.py`: `pathlib` recipes — globbing, IO, stat, name/suffix manipulation.
+
 If you want inline header comments added to each file instead of this README index, tell me and I can add short top-line descriptions to every `.py` file.

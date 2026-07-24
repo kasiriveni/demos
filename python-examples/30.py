@@ -2,7 +2,7 @@
 # Catch and handle errors with try/except/finally.
 
 try:
-    result = 10 / 0
+    result = 10 / 2
 except ZeroDivisionError as e:
     print("Caught error:", e)
 else:

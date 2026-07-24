@@ -8,5 +8,5 @@ def set_age(age):
 
 try:
     set_age(-5)
-except ValueError as e:
-    print("Invalid input:", e)
+except ValueError as msg:
+    print("Invalid input:", msg)

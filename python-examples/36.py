@@ -3,10 +3,12 @@
 
 import math
 from random import randint, choice
-import os
+# import os
+
+from os import getcwd
 
 print(math.sqrt(16))              # 4.0
 print(math.pi)                    # 3.14159...
 print(randint(1, 10))             # random int 1..10
 print(choice(["a", "b", "c"]))    # random pick
-print(os.getcwd())                # current working dir
+print(getcwd())                # current working dir
